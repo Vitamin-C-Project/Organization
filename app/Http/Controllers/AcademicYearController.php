@@ -20,7 +20,7 @@ class AcademicYearController extends Controller
 
     public function index()
     {
-        $years = AcademicYear::all();
+        $years = AcademicYear::paginate(10);
 
         return Inertia::render('academic_year/Index', [
             'years' => $years

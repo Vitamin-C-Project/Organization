@@ -18,7 +18,7 @@ class GradeController extends Controller
 
     public function index()
     {
-        $grades = Grade::all();
+        $grades = Grade::paginate(10);
 
         return Inertia::render('grade/Index', [
             'grades' => $grades

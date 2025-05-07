@@ -11,17 +11,28 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import InputError from '@/components/InputError.vue';
 import Switch from '@/components/Switch.vue';
-import { AcademicYear } from '@/types';
+import { AcademicYear, MetaPagination } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { columns } from '@/pages/academic_year/column';
 import DataTable from '@/components/DataTable.vue';
+import Pagination from '@/components/Pagination.vue';
 
-const props = defineProps<{years: AcademicYear[]}>()
+// const props = defineProps<{years: AcademicYear[]}>()
+//
+// const tableData = ref<AcademicYear[]>([])
+//
+// watchEffect(() => {
+//     tableData.value = [...props.years]
+// })
+
+const props = defineProps<{years: MetaPagination}>()
 
 const tableData = ref<AcademicYear[]>([])
+const metaPagination = ref<MetaPagination>()
 
 watchEffect(() => {
-    tableData.value = [...props.years]
+    tableData.value = [...props.years.data]
+    metaPagination.value = props.years
 })
 
 const { state, handler } = Hook();
@@ -43,6 +54,8 @@ const { state, handler } = Hook();
             delete: handler.handleDelete,
             updateStatus: handler.handleUpdateStatus,
         })" :data="tableData" />
+
+        <Pagination :meta-pagination="metaPagination!" />
     </AppLayout>
 
     <Dialog :open="state.showDialog.value.show" @update:open="handler.handleShowDialog(false, '')">

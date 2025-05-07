@@ -31,6 +31,22 @@ export interface SharedData extends PageProps {
     sidebarOpen: boolean;
 }
 
+export interface Pagination {
+    active: boolean;
+    label: string;
+    url: string | null;
+}
+
+export interface MetaPagination {
+    current_page: number;
+    last_page: number;
+    from: number;
+    per_page: number;
+    to: number;
+    total: number
+    links: Pagination[];
+}
+
 interface Common {
     id: number;
     created_at?: string;

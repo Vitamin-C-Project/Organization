@@ -2,27 +2,30 @@
 
 import { columns } from './column';
 import { Head } from '@inertiajs/vue3';
-import { LoaderCircle, Plus, Send } from 'lucide-vue-next';
+import { LoaderCircle, Plus, Send, ChevronLeft, ChevronRight } from 'lucide-vue-next';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Button } from '@/components/ui/button';
 import DataTable from '@/components/DataTable.vue';
 import Hook  from '.';
-import { Grade } from '@/types';
+import { Grade, MetaPagination } from '@/types';
 import { ref, watchEffect } from 'vue';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import InputError from '@/components/InputError.vue';
-import Switch from '@/components/Switch.vue';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import Pagination from '@/components/Pagination.vue';
+
 
 const {state, handler} = Hook();
 
-const props = defineProps<{grades: Grade[]}>()
+const props = defineProps<{grades: MetaPagination}>()
 
 const tableData = ref<Grade[]>([])
+const metaPagination = ref<MetaPagination>()
 
 watchEffect(() => {
-    tableData.value = [...props.grades]
+    tableData.value = [...props.grades.data]
+    metaPagination.value = props.grades
 })
 </script>
 
@@ -41,6 +44,8 @@ watchEffect(() => {
             edit: handler.handleEdit,
             delete: handler.handleDelete,
         })" :data="tableData" />
+
+        <Pagination :meta-pagination="metaPagination!" />
     </AppLayout>
 
     <Dialog :open="state.showDialog.value.show" @update:open="handler.handleShowDialog(false, '')">
