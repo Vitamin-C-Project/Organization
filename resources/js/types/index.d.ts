@@ -11,6 +11,11 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+export interface MainNavItem {
+    title: string;
+    menus: NavItem[];
+}
+
 export interface NavItem {
     title: string;
     href: string;
@@ -46,6 +51,11 @@ export interface AcademicYear extends Common{
     title: string;
     passcode: string;
     status: boolean
+}
+
+export interface Grade  extends  Common {
+    class: string;
+    major: string;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

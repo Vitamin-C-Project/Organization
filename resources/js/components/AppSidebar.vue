@@ -3,22 +3,50 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import { MainNavItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Calendar, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Calendar, Folder, LayoutGrid, List } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
+// const mainNavItems: NavItem[] = [
+//     {
+//         title: 'Dashboard',
+//         href: '/dashboard',
+//         icon: LayoutGrid,
+//     },
+//     {
+//         title: 'Tahun Ajaran',
+//         href: '/dashboard/academic-year',
+//         icon: Calendar,
+//     },
+// ];
+
+const mainMenu: MainNavItem[] = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
+        title: "Main",
+        menus: [
+            {
+                title: 'Dashboard',
+                href: '/dashboard',
+                icon: LayoutGrid,
+            }
+        ],
     },
     {
-        title: 'Tahun Ajaran',
-        href: '/dashboard/academic-year',
-        icon: Calendar,
-    },
+        title: "Data Master",
+        menus: [
+            {
+                title: 'Tahun Ajaran',
+                href: '/dashboard/academic-year',
+                icon: Calendar,
+            },
+            {
+                title: 'Kelas',
+                href: '/dashboard/grade',
+                icon: List,
+            },
+        ]
+    }
 ];
 
 const footerNavItems: NavItem[] = [
@@ -50,7 +78,7 @@ const footerNavItems: NavItem[] = [
         </SidebarHeader>
 
         <SidebarContent>
-            <NavMain :items="mainNavItems" />
+            <NavMain v-for="(menu, index) in mainMenu" :items="menu.menus" :key="index" :title="menu.title" />
         </SidebarContent>
 
         <SidebarFooter>
