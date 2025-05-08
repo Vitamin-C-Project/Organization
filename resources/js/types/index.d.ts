@@ -74,4 +74,11 @@ export interface Grade  extends  Common {
     major: string;
 }
 
+export interface Position extends  Common {
+    title: string;
+    description: string;
+    status: boolean;
+    parent: null;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;

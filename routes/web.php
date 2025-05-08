@@ -4,6 +4,7 @@ use App\Http\Controllers\GradeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\PositionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -27,8 +28,15 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::get('/', [GradeController::class, 'index'])->name('grade.index');
         Route::post('/', [GradeController::class, 'store'])->name('grade.store');
         Route::put('/{id}', [GradeController::class, 'update'])->name('grade.update');
-        Route::put('/{id}/update-status', [GradeController::class, 'updateStatus'])->name('grade.update.status');
         Route::delete('/{id}', [GradeController::class, 'destroy'])->name('grade.destroy');
+    });
+
+    Route::prefix('/position')->group(function () {
+        Route::get('/', [PositionController::class, 'index'])->name('position.index');
+        Route::post('/', [PositionController::class, 'store'])->name('position.store');
+        Route::put('/{id}', [PositionController::class, 'update'])->name('position.update');
+        Route::put('/{id}/update-status', [PositionController::class, 'updateStatus'])->name('position.update.status');
+        Route::delete('/{id}', [PositionController::class, 'destroy'])->name('position.destroy');
     });
 });
 

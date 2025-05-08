@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { MainNavItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Calendar, Folder, LayoutGrid, List } from 'lucide-vue-next';
+import { BookOpen, Calendar, Folder, LayoutGrid, List, ListOrdered } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
@@ -44,6 +44,11 @@ const mainMenu: MainNavItem[] = [
                 title: 'Kelas',
                 href: '/dashboard/grade',
                 icon: List,
+            },
+            {
+                title: 'Jabatan Organisasi',
+                href: '/dashboard/position',
+                icon: ListOrdered,
             },
         ]
     }
