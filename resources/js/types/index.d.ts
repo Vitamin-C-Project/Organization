@@ -38,12 +38,13 @@ export interface Pagination {
 }
 
 export interface MetaPagination {
+    data?: any;
     current_page: number;
     last_page: number;
     from: number;
     per_page: number;
     to: number;
-    total: number
+    total: number;
     links: Pagination[];
 }
 
@@ -63,22 +64,38 @@ export interface User {
     updated_at: string;
 }
 
-export interface AcademicYear extends Common{
+export interface AcademicYear extends Common {
     title: string;
     passcode: string;
-    status: boolean
+    status: boolean;
 }
 
-export interface Grade  extends  Common {
+export interface Grade extends Common {
     class: string;
     major: string;
 }
 
-export interface Position extends  Common {
+export interface Position extends Common {
     title: string;
     description: string;
     status: boolean;
     parent: null;
+}
+
+export interface Member extends Common {
+    year_id: number;
+    grade_id: number;
+    name: string;
+    phone: string;
+    gender: string;
+    birth_place: string;
+    birth_date: string;
+    address: string;
+    father_name: string;
+    status: boolean;
+    created_by: string;
+    grade?: Grade;
+    year?: AcademicYear;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { MainNavItem, type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Calendar, Folder, LayoutGrid, List, ListOrdered } from 'lucide-vue-next';
+import { AlignJustify, BookOpen, Calendar, Folder, LayoutGrid, List, ListCheck, ListOrdered } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
@@ -33,6 +33,21 @@ const mainMenu: MainNavItem[] = [
         ],
     },
     {
+        title: "Organisasi",
+        menus: [
+            {
+                title: 'Anggota Organisasi',
+                href: '/dashboard/member',
+                icon: AlignJustify,
+            },
+            {
+                title: 'Anggota Dewan',
+                href: '/dashboard/membership',
+                icon: ListCheck,
+            },
+        ],
+    },
+    {
         title: "Data Master",
         menus: [
             {
@@ -54,18 +69,18 @@ const mainMenu: MainNavItem[] = [
     }
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-    },
-];
+// const footerNavItems: NavItem[] = [
+//     {
+//         title: 'Github Repo',
+//         href: 'https://github.com/laravel/vue-starter-kit',
+//         icon: Folder,
+//     },
+//     {
+//         title: 'Documentation',
+//         href: 'https://laravel.com/docs/starter-kits#vue',
+//         icon: BookOpen,
+//     },
+// ];
 </script>
 
 <template>
@@ -87,7 +102,7 @@ const footerNavItems: NavItem[] = [
         </SidebarContent>
 
         <SidebarFooter>
-            <NavFooter :items="footerNavItems" />
+<!--            <NavFooter :items="footerNavItems" />-->
             <NavUser />
         </SidebarFooter>
     </Sidebar>

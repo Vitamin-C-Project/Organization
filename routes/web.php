@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\MemberController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -37,6 +38,16 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::put('/{id}', [PositionController::class, 'update'])->name('position.update');
         Route::put('/{id}/update-status', [PositionController::class, 'updateStatus'])->name('position.update.status');
         Route::delete('/{id}', [PositionController::class, 'destroy'])->name('position.destroy');
+    });
+
+    Route::prefix('/member')->group(function () {
+        Route::get('/', [MemberController::class, 'index'])->name('member.index');
+        Route::get('/create', [MemberController::class, 'create'])->name('member.create');
+        Route::post('/', [MemberController::class, 'store'])->name('member.store');
+        Route::get('/{id}/edit', [MemberController::class, 'edit'])->name('member.edit');
+        Route::put('/{id}', [MemberController::class, 'update'])->name('member.update');
+        Route::put('/{id}/update-status', [MemberController::class, 'updateStatus'])->name('member.update.status');
+        Route::delete('/{id}', [MemberController::class, 'destroy'])->name('member.destroy');
     });
 });
 
