@@ -23,7 +23,7 @@ class MemberController extends Controller
 
     public function index()
     {
-        $members = $this->member->with('year', 'grade')->withCount('membership as is_membership')->paginate(10);
+        $members = $this->member->with('year', 'grade')->withCount('membership as is_membership')->active()->orderBy('id', 'desc')->paginate(10);
 
         return Inertia::render('member/Index', [
             'members' => $members,
@@ -32,15 +32,12 @@ class MemberController extends Controller
 
     public function create()
     {
-        $year = $this->year->whereStatus(1)->first();
-        if (!$year) {
-            $year = $this->year->first();
-        }
+        $years = $this->year->all();
 
         $grades = $this->grade->all();
 
         return Inertia::render('member/Create', [
-            'year' => $year,
+            'years' => $years,
             'grades' => $grades,
         ]);
     }
@@ -77,16 +74,13 @@ class MemberController extends Controller
             return redirect()->route('member.index')->with('warning', 'Data tidak ditemukan');
         }
 
-        $year = $this->year->whereStatus(1)->first();
-        if (!$year) {
-            $year = $this->year->first();
-        }
+        $years = $this->year->all();
 
         $grades = $this->grade->all();
 
         return Inertia::render('member/Edit', [
             'member' => $member,
-            'year' => $year,
+            'years' => $years,
             'grades' => $grades,
         ]);
     }
@@ -101,6 +95,7 @@ class MemberController extends Controller
             }
 
             $member->update([
+                'year_id' => $request->validated('year'),
                 'grade_id' => $request->validated('grade'),
                 'name' => $request->validated('name'),
                 'phone' => $request->validated('phone'),
@@ -112,28 +107,7 @@ class MemberController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('member.index')->with('success', "Data '{$member->name}' berhasil diperbaharui");
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return back()->with('error', $th->getMessage());
-        }
-    }
-
-    public function updateStatus($id) {
-        DB::beginTransaction();
-
-        $member = $this->member->find($id);
-        if (!$member) {
-            return redirect()->route('member.index')->with('warning', 'Data tidak ditemukan');
-        }
-
-        try {
-            $member->update([
-                'status' => !$member->status,
-            ]);
-
-            DB::commit();
-            return back()->with('success', "Status '{$member->name}' berhasil diperbaharui");
+            return redirect()->back()->with('success', "Data '{$member->name}' berhasil diperbaharui");
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());

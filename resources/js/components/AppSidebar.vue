@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { MainNavItem, type NavItem } from '@/types';
+import { MainNavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { AlignJustify, BookOpen, Calendar, Folder, LayoutGrid, List, ListCheck, ListOrdered } from 'lucide-vue-next';
+import { AlignJustify, Calendar, LayoutGrid, List, ListCheck, ListEnd, ListOrdered } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
@@ -23,17 +22,17 @@ import AppLogo from './AppLogo.vue';
 
 const mainMenu: MainNavItem[] = [
     {
-        title: "Main",
+        title: 'Main',
         menus: [
             {
                 title: 'Dashboard',
                 href: '/dashboard',
                 icon: LayoutGrid,
-            }
+            },
         ],
     },
     {
-        title: "Organisasi",
+        title: 'Organisasi',
         menus: [
             {
                 title: 'Anggota Organisasi',
@@ -45,10 +44,15 @@ const mainMenu: MainNavItem[] = [
                 href: '/dashboard/membership',
                 icon: ListCheck,
             },
+            {
+                title: 'Alumni',
+                href: '/dashboard/alumni',
+                icon: ListEnd,
+            },
         ],
     },
     {
-        title: "Data Master",
+        title: 'Data Master',
         menus: [
             {
                 title: 'Tahun Ajaran',
@@ -65,8 +69,8 @@ const mainMenu: MainNavItem[] = [
                 href: '/dashboard/position',
                 icon: ListOrdered,
             },
-        ]
-    }
+        ],
+    },
 ];
 
 // const footerNavItems: NavItem[] = [
@@ -102,7 +106,7 @@ const mainMenu: MainNavItem[] = [
         </SidebarContent>
 
         <SidebarFooter>
-<!--            <NavFooter :items="footerNavItems" />-->
+            <!--            <NavFooter :items="footerNavItems" />-->
             <NavUser />
         </SidebarFooter>
     </Sidebar>

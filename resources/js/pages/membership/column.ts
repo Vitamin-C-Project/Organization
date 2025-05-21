@@ -1,11 +1,12 @@
-import { GENDER } from '@/constants';
-import { Member } from '@/types';
+import { Member, Membership } from '@/types';
 import { ColumnDef } from '@tanstack/vue-table';
 import { h } from 'vue';
 import Actions from './Actions.vue';
 
 type childProps = {
-    delete: (data: Member) => void;
+    edit: (data: Membership) => void;
+    delete: (data: Membership) => void;
+    transfer: (data: Membership) => void;
 };
 
 export const columns = (props: childProps): ColumnDef<Member>[] => {
@@ -15,7 +16,11 @@ export const columns = (props: childProps): ColumnDef<Member>[] => {
             header: 'Nama Anggota',
         },
         {
-            accessorKey: 'year.title',
+            accessorKey: 'membership.position.title',
+            header: 'Jabatan',
+        },
+        {
+            accessorKey: 'membership.year.title',
             header: 'Tahun Ajaran',
         },
         {
@@ -23,26 +28,16 @@ export const columns = (props: childProps): ColumnDef<Member>[] => {
             header: 'Kelas',
         },
         {
-            accessorKey: 'gender',
-            header: 'Jenis Kelamin',
-            cell: ({ row }) => {
-                const gender = row.original.gender;
-                return GENDER.find((item) => item.key === gender)?.value;
-            },
-        },
-        {
-            accessorKey: 'phone',
-            header: 'No WA/Telepon',
-        },
-        {
             accessorKey: 'id',
             header: '',
             cell: ({ row }) => {
-                const member = row.original;
+                const member = row.original.membership;
 
                 return h(Actions, {
-                    member,
-                    onDelete: () => props.delete(member),
+                    member: member!,
+                    onEdit: () => props.edit(member!),
+                    onDelete: () => props.delete(member!),
+                    onTransfer: () => props.transfer(member!),
                 });
             },
         },

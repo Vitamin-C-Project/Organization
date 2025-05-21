@@ -6,18 +6,18 @@ import { Link } from '@inertiajs/vue3';
 import { Edit, Trash } from 'lucide-vue-next';
 
 defineProps<{
-    grade: Member;
+    member: Member;
 }>();
 
 defineEmits<{
-    (e: 'delete', grade: Member): void;
+    (e: 'delete', member: Member): void;
 }>();
 </script>
 
 <template>
     <div class="flex items-center justify-end gap-3">
-        <Link :href="route('member.edit', grade.id)" :class="cn(buttonVariants({ variant: 'outline', size: 'sm' }))"> <Edit /> Edit </Link>
-        <Button variant="destructive" @click="$emit('delete', grade)" size="sm"> <Trash /> Hapus </Button>
+        <Link :href="route('member.edit', member.id)" :class="cn(buttonVariants({ variant: 'outline', size: 'sm' }))"> <Edit /> Edit </Link>
+        <Button variant="destructive" @click="$emit('delete', member)" size="sm" v-if="!member.is_membership"> <Trash /> Hapus </Button>
     </div>
 </template>
 

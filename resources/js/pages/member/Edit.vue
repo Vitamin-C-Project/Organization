@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InputError from '@/components/InputError.vue';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,15 +10,18 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { cn } from '@/lib/utils';
 import Hook from '@/pages/member/index';
 import { AcademicYear, Grade, Member } from '@/types';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 import { ChevronLeftCircle, Send } from 'lucide-vue-next';
 
-const props = defineProps<{ year: AcademicYear; grades: Grade[]; member: Member }>();
+const props = defineProps<{ years: AcademicYear[]; grades: Grade[]; member: Member }>();
 
 const { state, handler } = Hook({
-    year: props.year,
     member: props.member,
 });
+
+const goBack = () => {
+    window.history.back();
+};
 </script>
 
 <template>
@@ -34,8 +37,24 @@ const { state, handler } = Hook({
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div class="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-                            <div class="grid gap-2">
+                        <div class="mb-5 grid gap-5">
+                            <div class="col-span-2 grid gap-2">
+                                <Label for="year">Tahun Ajaran</Label>
+                                <Select :disabled="state.form.processing" @update:model-value="state.form.year = $event">
+                                    <SelectTrigger>
+                                        <SelectValue :placeholder="years.find((year) => year.id === member.year_id)?.title || 'Pilih Tahun Ajaran'" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectItem v-for="(year, index) in years" :key="index" :value="year.id" class="cursor-pointer">
+                                                {{ year.title }}
+                                            </SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                                <InputError :message="state.form.errors.grade" />
+                            </div>
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="name">Nama Lengkap</Label>
                                 <Input
                                     id="name"
@@ -48,8 +67,8 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.name" />
                             </div>
-                            <div class="grid gap-2">
-                                <Label for="year">Kelas</Label>
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
+                                <Label for="grade">Kelas</Label>
                                 <Select :disabled="state.form.processing" @update:model-value="state.form.grade = $event">
                                     <SelectTrigger>
                                         <SelectValue :placeholder="grades.find((grade) => grade.id === member.grade_id)?.class || 'Pilih Kelas'" />
@@ -64,7 +83,7 @@ const { state, handler } = Hook({
                                 </Select>
                                 <InputError :message="state.form.errors.grade" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="phone">No WA/Telepon</Label>
                                 <Input
                                     id="phone"
@@ -76,7 +95,7 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.phone" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="gender">Jenis Kelamin</Label>
                                 <Select :disabled="state.form.processing" @update:model-value="state.form.gender = $event">
                                     <SelectTrigger>
@@ -101,7 +120,7 @@ const { state, handler } = Hook({
                                 </Select>
                                 <InputError :message="state.form.errors.gender" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="birth_place">Tempat Lahir</Label>
                                 <Input
                                     id="birth_place"
@@ -113,7 +132,7 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.birth_place" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="birth_date">Tanggal Lahir</Label>
                                 <Input
                                     id="birth_date"
@@ -124,7 +143,7 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.birth_date" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="father_name">Nama Orang Tua</Label>
                                 <Input
                                     id="father_name"
@@ -150,11 +169,14 @@ const { state, handler } = Hook({
                             </div>
                         </div>
                     </CardContent>
-                    <CardFooter class="justify-between">
-                        <Link
-                            :href="route('member.index')"
-                            :class="cn(buttonVariants({ variant: 'secondary' }), state.form.processing && 'cursor-not-allowed')"
-                            ><ChevronLeftCircle /> Kembali</Link
+                    <CardFooter class="flex items-center justify-between">
+                        <Button
+                            variant="secondary"
+                            :class="cn(state.form.processing && 'cursor-not-allowed')"
+                            @click="goBack()"
+                            type="button"
+                            :disabled="state.form.processing"
+                            ><ChevronLeftCircle /> Kembali</Button
                         >
                         <Button :disabled="state.form.processing">
                             <Send />

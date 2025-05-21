@@ -13,11 +13,9 @@ import { AcademicYear, Grade } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import { ChevronLeftCircle, Send } from 'lucide-vue-next';
 
-const props = defineProps<{ year: AcademicYear; grades: Grade[] }>();
+const props = defineProps<{ years: AcademicYear[]; grades: Grade[] }>();
 
-const { state, handler } = Hook({
-    year: props.year,
-});
+const { state, handler } = Hook({});
 </script>
 
 <template>
@@ -33,20 +31,24 @@ const { state, handler } = Hook({
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div class="mb-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+                        <div class="mb-5 grid gap-5">
                             <div class="col-span-2 grid gap-2">
                                 <Label for="year">Tahun Ajaran</Label>
-                                <Input
-                                    id="year"
-                                    type="text"
-                                    required
-                                    readonly
-                                    autocomplete="year"
-                                    :default-value="year.title || 'Harap Buat Tahun Ajaran Terlebih Dahulu'"
-                                />
-                                <InputError :message="state.form.errors.year" />
+                                <Select :disabled="state.form.processing" @update:model-value="state.form.year = $event">
+                                    <SelectTrigger>
+                                        <SelectValue :placeholder="'Pilih Tahun Ajaran'" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectGroup>
+                                            <SelectItem v-for="(year, index) in years" :key="index" :value="year.id" class="cursor-pointer">
+                                                {{ year.title }}
+                                            </SelectItem>
+                                        </SelectGroup>
+                                    </SelectContent>
+                                </Select>
+                                <InputError :message="state.form.errors.grade" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="name">Nama Lengkap</Label>
                                 <Input
                                     id="name"
@@ -59,11 +61,11 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.name" />
                             </div>
-                            <div class="grid gap-2">
-                                <Label for="year">Kelas</Label>
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
+                                <Label for="grade">Kelas</Label>
                                 <Select :disabled="state.form.processing" @update:model-value="state.form.grade = $event">
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Pilih Kelas" />
+                                        <SelectValue :placeholder="'Pilih Kelas'" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
@@ -75,7 +77,7 @@ const { state, handler } = Hook({
                                 </Select>
                                 <InputError :message="state.form.errors.grade" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="phone">No WA/Telepon</Label>
                                 <Input
                                     id="phone"
@@ -87,11 +89,11 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.phone" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="gender">Jenis Kelamin</Label>
                                 <Select :disabled="state.form.processing" @update:model-value="state.form.gender = $event">
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Pilih Jenis Kelamin" />
+                                        <SelectValue :placeholder="'Pilih Jenis Kelamin'" />
                                     </SelectTrigger>
                                     <SelectContent>
                                         <SelectGroup>
@@ -108,7 +110,7 @@ const { state, handler } = Hook({
                                 </Select>
                                 <InputError :message="state.form.errors.gender" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="birth_place">Tempat Lahir</Label>
                                 <Input
                                     id="birth_place"
@@ -120,7 +122,7 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.birth_place" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="birth_date">Tanggal Lahir</Label>
                                 <Input
                                     id="birth_date"
@@ -131,7 +133,7 @@ const { state, handler } = Hook({
                                 />
                                 <InputError :message="state.form.errors.birth_date" />
                             </div>
-                            <div class="grid gap-2">
+                            <div class="col-span-2 grid gap-2 md:col-span-1">
                                 <Label for="father_name">Nama Orang Tua</Label>
                                 <Input
                                     id="father_name"

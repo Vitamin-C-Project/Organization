@@ -4,8 +4,10 @@ use App\Http\Controllers\GradeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MembershipController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -46,8 +48,21 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::post('/', [MemberController::class, 'store'])->name('member.store');
         Route::get('/{id}/edit', [MemberController::class, 'edit'])->name('member.edit');
         Route::put('/{id}', [MemberController::class, 'update'])->name('member.update');
-        Route::put('/{id}/update-status', [MemberController::class, 'updateStatus'])->name('member.update.status');
         Route::delete('/{id}', [MemberController::class, 'destroy'])->name('member.destroy');
+    });
+
+    Route::prefix('/membership')->group(function () {
+        Route::get('/', [MembershipController::class, 'index'])->name('membership.index');
+        Route::post('/', [MembershipController::class, 'store'])->name('membership.store');
+        Route::put('/{id}', [MembershipController::class, 'update'])->name('membership.update');
+        Route::put('/{id}/transfer', [MembershipController::class, 'transfer'])->name('membership.transfer');
+        Route::delete('/{id}', [MembershipController::class, 'destroy'])->name('membership.destroy');
+    });
+
+    Route::prefix('/alumni')->group(function () {
+        Route::get('/', [AlumniController::class, 'index'])->name('alumni.index');
+        Route::put('/{id}', [AlumniController::class, 'update'])->name('alumni.update');
+        Route::delete('/{id}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
     });
 });
 

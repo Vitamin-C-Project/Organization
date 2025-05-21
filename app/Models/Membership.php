@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -17,6 +19,12 @@ class Membership extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    #[Scope]
+    public function active(Builder $builder): void
+    {
+        $builder->where('status', 1);
+    }
 
     public function year(): BelongsTo
     {

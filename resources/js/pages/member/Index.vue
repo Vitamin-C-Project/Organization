@@ -42,7 +42,6 @@ watchEffect(() => {
             :columns="
                 columns({
                     delete: handler.handleDelete,
-                    updateStatus: handler.handleUpdateStatus,
                 })
             "
             :data="tableData"

@@ -93,9 +93,33 @@ export interface Member extends Common {
     address: string;
     father_name: string;
     status: boolean;
+    is_membership: boolean;
     created_by: string;
     grade?: Grade;
     year?: AcademicYear;
+    membership?: Membership;
+}
+
+export interface Alumni extends Common {
+    membership_id: number;
+    member_id: number;
+    destination_name?: string;
+    appointment?: string;
+    graduation_year?: string;
+    type: number;
+    status: boolean;
+    member?: Member;
+    membership?: Membership;
+}
+
+export interface Membership extends Common {
+    member_id: number;
+    year_id: number;
+    position_id: number;
+    status: boolean;
+    year?: AcademicYear;
+    member?: Member;
+    position?: Position;
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;

@@ -1,10 +1,10 @@
 import { GENDER } from '@/constants';
 import { dateFormat, showToast } from '@/lib/utils';
-import { AcademicYear, BreadcrumbItem, Member, SharedData } from '@/types';
+import { BreadcrumbItem, Member, SharedData } from '@/types';
 import { router, useForm, usePage } from '@inertiajs/vue3';
 import Swal from 'sweetalert2';
 
-export default function Hook({ year, member }: { year?: AcademicYear; member?: Member }) {
+export default function Hook({ member }: { member?: Member }) {
     const page = usePage<SharedData>();
     const breadcrumbs: BreadcrumbItem[] = [
         {
@@ -34,7 +34,6 @@ export default function Hook({ year, member }: { year?: AcademicYear; member?: M
     });
 
     const handleCreate = () => {
-        form.year = year?.id.toString();
         form.post(route('member.store'), {
             preserveScroll: true,
             onSuccess: () => {
@@ -90,15 +89,6 @@ export default function Hook({ year, member }: { year?: AcademicYear; member?: M
         });
     };
 
-    const handleUpdateStatus = (member: Member) => {
-        form.put(route('member.update.status', { id: member.id }), {
-            preserveScroll: true,
-            onFinish: () => {
-                showToast(page?.props?.flash);
-            },
-        });
-    };
-
     showToast(page?.props?.flash);
 
     return {
@@ -111,7 +101,6 @@ export default function Hook({ year, member }: { year?: AcademicYear; member?: M
             handleCreate,
             handleDelete,
             handleUpdate,
-            handleUpdateStatus,
             dateFormat,
         },
     };

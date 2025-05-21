@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +32,12 @@ class Member extends Model
         'status' => 'boolean',
     ];
 
+    #[Scope]
+    public function active(Builder $builder): void
+    {
+        $builder->where('status', 1);
+    }
+
     public  function year(): BelongsTo
     {
         return $this->belongsTo(AcademicYear::class, 'year_id', 'id');
@@ -40,7 +48,8 @@ class Member extends Model
         return $this->belongsTo(Grade::class, 'grade_id', 'id');
     }
 
-    public  function membership(): HasOne {
+    public  function membership(): HasOne
+    {
         return $this->hasOne(Membership::class, 'member_id', 'id');
     }
 }
