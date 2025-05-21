@@ -28,7 +28,7 @@ watchEffect(() => {
 <template>
     <Head title="Anggota Organisasi" />
 
-    <AppLayout :breadcrumbs="state.breadcrumbs">
+    <AppLayout :breadcrumbs="state.breadcrumbIndex">
         <TitlePage title="Anggota Organisasi">
             <div class="flex items-center space-x-2">
                 <Link :href="route('member.create')" :class="cn(buttonVariants({ variant: 'default' }))">

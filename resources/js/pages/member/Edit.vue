@@ -27,7 +27,7 @@ const goBack = () => {
 <template>
     <Head :title="`Edit Anggota ${member.name}`" />
 
-    <AppLayout :breadcrumbs="state.breadcrumbs">
+    <AppLayout :breadcrumbs="state.breadcrumbEdit">
         <div class="mx-auto mt-5 w-full max-w-4xl">
             <form action="" method="post" @submit.prevent="handler.handleUpdate">
                 <Card>

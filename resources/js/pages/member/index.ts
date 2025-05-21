@@ -6,7 +6,17 @@ import Swal from 'sweetalert2';
 
 export default function Hook({ member }: { member?: Member }) {
     const page = usePage<SharedData>();
-    const breadcrumbs: BreadcrumbItem[] = [
+    const breadcrumbIndex: BreadcrumbItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+        },
+        {
+            title: 'Anggota Organisasi',
+            href: '/dashboard/member',
+        },
+    ];
+    const breadcrumbCreate: BreadcrumbItem[] = [
         {
             title: 'Dashboard',
             href: '/dashboard',
@@ -18,6 +28,20 @@ export default function Hook({ member }: { member?: Member }) {
         {
             title: 'Tambah Anggota',
             href: '/dashboard/member/create',
+        },
+    ];
+    const breadcrumbEdit: BreadcrumbItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+        },
+        {
+            title: 'Anggota Organisasi',
+            href: '/dashboard/member',
+        },
+        {
+            title: 'Edit Anggota',
+            href: member ? `/dashboard/member/${member.id}/edit` : '',
         },
     ];
 
@@ -93,7 +117,9 @@ export default function Hook({ member }: { member?: Member }) {
 
     return {
         state: {
-            breadcrumbs,
+            breadcrumbIndex,
+            breadcrumbCreate,
+            breadcrumbEdit,
             genders: GENDER,
             form,
         },
