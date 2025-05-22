@@ -10,7 +10,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MembershipController;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome');
+    return Inertia::render('landing/Home');
 })->name('home');
 
 
