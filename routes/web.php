@@ -5,13 +5,13 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MembershipController;
 
-Route::get('/', function () {
-    return Inertia::render('landing/Home');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
 
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
@@ -64,7 +64,12 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::put('/{id}', [AlumniController::class, 'update'])->name('alumni.update');
         Route::delete('/{id}', [AlumniController::class, 'destroy'])->name('alumni.destroy');
     });
+
+    Route::prefix('/configs')->group(function () {
+        Route::get('/', [ConfigController::class, 'index'])->name('config.index');
+        Route::post('/{id}', [ConfigController::class, 'update'])->name('config.update');
+    });
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';

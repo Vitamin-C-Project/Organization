@@ -1,4 +1,5 @@
 import { toast } from '@/components/ui/toast';
+import { Config } from '@/types';
 import { clsx, type ClassValue } from 'clsx';
 import moment from 'moment';
 import { twMerge } from 'tailwind-merge';
@@ -37,4 +38,8 @@ export function dateFormat(date: string, format = 'D MMM YYYY, HH:mm a', region 
     moment.locale(region);
 
     return moment(date).format(format);
+}
+
+export function findConfig(key: string, configs: Config[]) {
+    return configs.find((config) => config.key === key)?.value;
 }

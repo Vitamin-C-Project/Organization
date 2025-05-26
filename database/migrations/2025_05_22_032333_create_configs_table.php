@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('key', 100)->unique();
             $table->text('value');
+            $table->string('type', 100)->default('text');
         });
     }
 

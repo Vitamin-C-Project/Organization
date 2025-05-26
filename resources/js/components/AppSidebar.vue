@@ -4,7 +4,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { MainNavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { AlignJustify, Calendar, LayoutGrid, List, ListCheck, ListEnd, ListOrdered } from 'lucide-vue-next';
+import { AlignJustify, Calendar, LayoutGrid, List, ListCheck, ListEnd, ListOrdered, Settings, UserCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
@@ -68,6 +68,21 @@ const mainMenu: MainNavItem[] = [
                 title: 'Jabatan Organisasi',
                 href: '/dashboard/position',
                 icon: ListOrdered,
+            },
+        ],
+    },
+    {
+        title: 'Konfigurasi',
+        menus: [
+            {
+                title: 'Konfigurasi Aplikasi',
+                href: '/dashboard/configs',
+                icon: Settings,
+            },
+            {
+                title: 'Akun Admin',
+                href: '/dashboard/admins',
+                icon: UserCheck,
             },
         ],
     },

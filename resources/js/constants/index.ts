@@ -27,3 +27,14 @@ export const ALUMNI_TYPES: { key: number; value: string }[] = [
         value: 'Lainnya',
     },
 ];
+
+export const CONFIG_TYPES: { key: string; value: string }[] = [
+    {
+        key: 'text',
+        value: 'Text',
+    },
+    {
+        key: 'file',
+        value: 'File',
+    },
+];

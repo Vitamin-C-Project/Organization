@@ -122,4 +122,10 @@ export interface Membership extends Common {
     position?: Position;
 }
 
+export interface Config extends Common {
+    key: string;
+    value: string;
+    type: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
