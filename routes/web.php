@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\MemberController;
@@ -68,6 +70,29 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
     Route::prefix('/configs')->group(function () {
         Route::get('/', [ConfigController::class, 'index'])->name('config.index');
         Route::post('/{id}', [ConfigController::class, 'update'])->name('config.update');
+    });
+
+    Route::controller(ArticleController::class)->prefix('article')->group(function () {
+        Route::get('/', 'index')->name('article.index');
+        Route::get('/create', 'create')->name('article.create');
+        Route::post('/', 'store')->name('article.store');
+        Route::get('/{id}/edit', 'edit')->name('article.edit');
+        Route::post('/{id}/update', 'update')->name('article.update');
+        Route::put('/{id}/update-status', 'updateStatus')->name('article.update.status');
+        Route::delete('/{id}', 'destroy')->name('article.destroy');
+    });
+
+    Route::controller(GalleryController::class)->prefix('gallery')->group(function () {
+        Route::get('/', 'index')->name('gallery.index');
+        Route::post('/', 'store')->name('gallery.store');
+        Route::get('/{slug}', 'show')->name('gallery.show');
+        Route::put('/{id}/update', 'update')->name('gallery.update');
+        Route::put('/{id}/update-status', 'updateStatus')->name('gallery.update.status');
+        Route::delete('/{id}', 'destroy')->name('gallery.destroy');
+
+        Route::post('/{id}/upload', 'upload')->name('gallery.upload');
+        Route::get('/{id}/download-file', 'downloadFile')->name('gallery.download.file');
+        Route::delete('/{id}/delete-file', 'deleteFile')->name('gallery.delete.file');
     });
 });
 

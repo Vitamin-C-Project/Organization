@@ -4,12 +4,12 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { MainNavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { AlignJustify, Calendar, LayoutGrid, List, ListCheck, ListEnd, ListOrdered, Settings, UserCheck } from 'lucide-vue-next';
+import { Album, AlignJustify, Calendar, LayoutGrid, LetterText, List, ListCheck, ListEnd, ListOrdered, Settings, UserCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
 //     {
-//         title: 'Dashboard',
+//         title: 'Dasbor',
 //         href: '/dashboard',
 //         icon: LayoutGrid,
 //     },
@@ -25,7 +25,7 @@ const mainMenu: MainNavItem[] = [
         title: 'Main',
         menus: [
             {
-                title: 'Dashboard',
+                title: 'Dasbor',
                 href: '/dashboard',
                 icon: LayoutGrid,
             },
@@ -72,12 +72,22 @@ const mainMenu: MainNavItem[] = [
         ],
     },
     {
-        title: 'Konfigurasi',
+        title: 'Aplikasi & Pengaturan',
         menus: [
             {
                 title: 'Konfigurasi Aplikasi',
                 href: '/dashboard/configs',
                 icon: Settings,
+            },
+            {
+                title: 'Artikel',
+                href: '/dashboard/article',
+                icon: LetterText,
+            },
+            {
+                title: 'Galeri',
+                href: '/dashboard/gallery',
+                icon: Album,
             },
             {
                 title: 'Akun Admin',

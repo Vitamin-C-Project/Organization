@@ -11,6 +11,8 @@
     --font-fira-code: 'Fira Code', sans-serif;
 }
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

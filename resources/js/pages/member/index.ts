@@ -8,7 +8,7 @@ export default function Hook({ member }: { member?: Member }) {
     const page = usePage<SharedData>();
     const breadcrumbIndex: BreadcrumbItem[] = [
         {
-            title: 'Dashboard',
+            title: 'Dasbor',
             href: '/dashboard',
         },
         {
@@ -18,7 +18,7 @@ export default function Hook({ member }: { member?: Member }) {
     ];
     const breadcrumbCreate: BreadcrumbItem[] = [
         {
-            title: 'Dashboard',
+            title: 'Dasbor',
             href: '/dashboard',
         },
         {
@@ -32,7 +32,7 @@ export default function Hook({ member }: { member?: Member }) {
     ];
     const breadcrumbEdit: BreadcrumbItem[] = [
         {
-            title: 'Dashboard',
+            title: 'Dasbor',
             href: '/dashboard',
         },
         {

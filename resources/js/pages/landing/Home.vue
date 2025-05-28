@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Layout from '@/layouts/landing/Layout.vue';
-import { Config } from '@/types';
+import { Article, Config } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import About from './section/About.vue';
 import Contact from './section/Contact.vue';
@@ -8,7 +8,7 @@ import Gallery from './section/Gallery.vue';
 import Home from './section/Home.vue';
 import News from './section/News.vue';
 
-defineProps<{ configs: Config[] }>();
+defineProps<{ configs: Config[]; articles: Article[] }>();
 </script>
 
 <template>
@@ -16,7 +16,7 @@ defineProps<{ configs: Config[] }>();
     <Layout>
         <Home :configs="configs" />
         <About :configs="configs" />
-        <News />
+        <News :articles="articles" />
         <Gallery />
         <Contact />
     </Layout>

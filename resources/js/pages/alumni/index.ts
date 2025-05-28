@@ -8,7 +8,7 @@ export default function Hook() {
     const page = usePage<SharedData>();
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: 'Dashboard',
+            title: 'Dasbor',
             href: '/dashboard',
         },
         {

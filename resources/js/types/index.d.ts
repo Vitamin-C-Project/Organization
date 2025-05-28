@@ -128,4 +128,31 @@ export interface Config extends Common {
     type: string;
 }
 
+export interface Article extends Common {
+    title: string;
+    slug: string;
+    description: string;
+    content: string;
+    image: string;
+    status: boolean;
+}
+
+export interface Album extends Common {
+    title: string;
+    slug: string;
+    status: boolean;
+    totalFile: number;
+}
+
+export interface Gallery extends Common {
+    album_id: number;
+    file_name: string;
+    file_path: string;
+    file_type: string;
+    file_extension: string;
+    file_size: number;
+    album?: Album;
+    files?: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
