@@ -9,11 +9,11 @@ export default function Hook({ member }: { member?: Membership }) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Anggota Dewan',
-            href: '/dashboard/membership',
+            href: route('membership.index'),
         },
     ];
     const showDialog = ref({

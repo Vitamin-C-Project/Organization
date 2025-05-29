@@ -9,39 +9,39 @@ export default function Hook({ member }: { member?: Member }) {
     const breadcrumbIndex: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Anggota Organisasi',
-            href: '/dashboard/member',
+            href: route('member.index'),
         },
     ];
     const breadcrumbCreate: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Anggota Organisasi',
-            href: '/dashboard/member',
+            href: route('member.index'),
         },
         {
             title: 'Tambah Anggota',
-            href: '/dashboard/member/create',
+            href: route('member.create'),
         },
     ];
     const breadcrumbEdit: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Anggota Organisasi',
-            href: '/dashboard/member',
+            href: route('member.index'),
         },
         {
             title: 'Edit Anggota',
-            href: member ? `/dashboard/member/${member.id}/edit` : '',
+            href: member ? route('member.edit', member.id) : '',
         },
     ];
 

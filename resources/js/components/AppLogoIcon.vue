@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { findConfig } from '@/lib/utils';
+import { Config, SharedData } from '@/types';
+import { usePage } from '@inertiajs/vue3';
 import type { HTMLAttributes } from 'vue';
 
 defineOptions({
@@ -10,10 +13,19 @@ interface Props {
 }
 
 defineProps<Props>();
+
+const page = usePage<SharedData>();
 </script>
 
 <template>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 42" :class="className" v-bind="$attrs">
+    <img
+        v-if="findConfig('app_image', page.props.configs as Config[])"
+        :src="`/storage/${findConfig('app_image', page.props.configs as Config[])}`"
+        :alt="page.props.name"
+        :class="className"
+        v-bind="$attrs"
+    />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 42" :class="className" v-bind="$attrs" v-else>
         <path
             fill="currentColor"
             fill-rule="evenodd"

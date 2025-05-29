@@ -15,12 +15,22 @@ class ConfigSeeder extends Seeder
     {
         $configs = [
             [
+                'key' => 'app_image',
+                'value' => 'http://127.0.0.1:8000/',
+                'type' => 'file',
+            ],
+            [
                 'key' => 'hero_title',
                 'value' => 'Be Prepared. Be a Scout.',
             ],
             [
                 'key' => 'hero_description',
                 'value' => 'Building character through adventure and service.',
+            ],
+            [
+                'key' => 'hero_image',
+                'value' => 'http://127.0.0.1:8000/',
+                'type' => 'file',
             ],
             [
                 'key' => 'about_title',
@@ -47,6 +57,7 @@ class ConfigSeeder extends Seeder
                 'key' => 'contact_address',
                 'value' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.',
             ],
+
         ];
 
         foreach ($configs as $config) {

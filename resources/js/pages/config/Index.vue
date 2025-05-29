@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import DataTable from '@/components/DataTable.vue';
 import InputError from '@/components/InputError.vue';
-import Pagination from '@/components/Pagination.vue';
 import TitlePage from '@/components/TitlePage.vue';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -9,18 +8,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { showToast } from '@/lib/utils';
-import { Config, MetaPagination, SharedData } from '@/types';
+import { Config, SharedData } from '@/types';
 import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { LoaderCircle, Send } from 'lucide-vue-next';
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import { columns } from './column';
 
-const props = defineProps<{ configs: MetaPagination }>();
+const props = defineProps<{ configs: Config[] }>();
 const page = usePage<SharedData>();
-
-const tableData = ref<Config[]>([]);
-const metaPagination = ref<MetaPagination>();
-
 const configSelected = ref<Config>();
 const showDialog = ref<boolean>(false);
 const form = useForm({
@@ -50,17 +45,23 @@ const handleSubmit = () => {
         },
     });
 };
-
-watchEffect(() => {
-    tableData.value = [...props.configs.data];
-    metaPagination.value = props.configs;
-});
 </script>
 
 <template>
     <Head title="Konfigurasi Aplikasi" />
 
-    <AppLayout :breadcrumbs="[]">
+    <AppLayout
+        :breadcrumbs="[
+            {
+                title: 'Dasbor',
+                href: route('dashboard'),
+            },
+            {
+                title: 'Konfigurasi Aplikasi',
+                href: route('config.index'),
+            },
+        ]"
+    >
         <TitlePage title="Konfigurasi Aplikasi"></TitlePage>
 
         <DataTable
@@ -69,10 +70,10 @@ watchEffect(() => {
                     edit: handleEdit,
                 })
             "
-            :data="tableData"
+            :data="configs"
         />
 
-        <Pagination :meta-pagination="metaPagination!" />
+        <!-- <Pagination :meta-pagination="metaPagination!" /> -->
     </AppLayout>
 
     <Dialog

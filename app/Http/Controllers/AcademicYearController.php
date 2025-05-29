@@ -23,7 +23,8 @@ class AcademicYearController extends Controller
         $years = AcademicYear::paginate(10);
 
         return Inertia::render('academic_year/Index', [
-            'years' => $years
+            'years' => $years,
+            "configs" => $this->getConfigs()
         ]);
     }
 

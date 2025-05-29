@@ -135,6 +135,7 @@ export interface Article extends Common {
     content: string;
     image: string;
     status: boolean;
+    created_by: string;
 }
 
 export interface Album extends Common {

@@ -9,35 +9,35 @@ export default function Hook({ article }: { article?: Article }) {
     const breadcrumbIndex: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Artikel',
-            href: '/dashboard/article',
+            href: route('article.index'),
         },
     ];
     const breadcrumbCreate: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Artikel',
-            href: '/dashboard/article',
+            href: route('article.index'),
         },
         {
             title: 'Tambah Anggota',
-            href: '/dashboard/article/create',
+            href: route('article.create'),
         },
     ];
     const breadcrumbEdit: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Artikel',
-            href: '/dashboard/article',
+            href: route('article.index'),
         },
         {
             title: 'Edit Anggota',

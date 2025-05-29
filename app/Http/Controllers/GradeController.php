@@ -12,16 +12,15 @@ class GradeController extends Controller
 {
     public function __construct(
         protected $grade = new Grade()
-    )
-    {
-    }
+    ) {}
 
     public function index()
     {
         $grades = $this->grade->paginate(10);
 
         return Inertia::render('grade/Index', [
-            'grades' => $grades
+            'grades' => $grades,
+            "configs" => $this->getConfigs()
         ]);
     }
 

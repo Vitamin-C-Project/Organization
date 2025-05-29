@@ -1,22 +1,22 @@
 <script setup lang="ts">
+import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head } from '@inertiajs/vue3';
-import { Button } from '@/components/ui/button';
 import { LoaderCircle, Plus, Send } from 'lucide-vue-next';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-import Hook from '.';
+import DataTable from '@/components/DataTable.vue';
+import InputError from '@/components/InputError.vue';
+import Pagination from '@/components/Pagination.vue';
+import Switch from '@/components/Switch.vue';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import InputError from '@/components/InputError.vue';
-import Switch from '@/components/Switch.vue';
-import { Position, MetaPagination } from '@/types';
-import { ref, watchEffect } from 'vue';
-import { columns } from '@/pages/position/column';
-import DataTable from '@/components/DataTable.vue';
-import Pagination from '@/components/Pagination.vue';
 import { Textarea } from '@/components/ui/textarea';
+import { columns } from '@/pages/position/column';
+import { MetaPagination, Position } from '@/types';
+import { ref, watchEffect } from 'vue';
+import Hook from '.';
 
 const props = defineProps<{ positions: MetaPagination }>();
 

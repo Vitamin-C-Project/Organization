@@ -10,8 +10,7 @@ use Inertia\Inertia;
 
 class AlumniController extends Controller
 {
-    public function __construct(protected Alumni $alumni) {
-    }
+    public function __construct(protected Alumni $alumni) {}
 
     public function index()
     {
@@ -19,6 +18,7 @@ class AlumniController extends Controller
 
         return Inertia::render('alumni/Index', [
             'alumni' => $alumni,
+            "configs" => $this->getConfigs()
         ]);
     }
 

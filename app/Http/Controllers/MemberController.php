@@ -17,9 +17,7 @@ class MemberController extends Controller
         protected Member $member,
         protected Grade $grade,
         protected AcademicYear $year,
-    )
-    {
-    }
+    ) {}
 
     public function index()
     {
@@ -27,6 +25,7 @@ class MemberController extends Controller
 
         return Inertia::render('member/Index', [
             'members' => $members,
+            "configs" => $this->getConfigs()
         ]);
     }
 
@@ -39,6 +38,7 @@ class MemberController extends Controller
         return Inertia::render('member/Create', [
             'years' => $years,
             'grades' => $grades,
+            "configs" => $this->getConfigs()
         ]);
     }
 
@@ -68,7 +68,8 @@ class MemberController extends Controller
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $member = $this->member->find($id);
         if (!$member) {
             return redirect()->route('member.index')->with('warning', 'Data tidak ditemukan');
@@ -82,10 +83,12 @@ class MemberController extends Controller
             'member' => $member,
             'years' => $years,
             'grades' => $grades,
+            "configs" => $this->getConfigs()
         ]);
     }
 
-    public function update(MemberRequest $request, $id) {
+    public function update(MemberRequest $request, $id)
+    {
         DB::beginTransaction();
 
         try {
@@ -114,7 +117,8 @@ class MemberController extends Controller
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         DB::beginTransaction();
 
         try {

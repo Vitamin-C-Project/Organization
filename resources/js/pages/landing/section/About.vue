@@ -14,23 +14,6 @@ defineProps<{ configs: Config[] }>();
                     <p class="!mb-4 text-amber-800">
                         {{ findConfig('about_description', configs) }}
                     </p>
-                    <button class="primary-button flex items-center space-x-2">
-                        <span>Learn More</span
-                        ><svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="lucide lucide-chevron-right h-5 w-5 transform transition-transform group-hover:translate-x-1"
-                        >
-                            <path d="m9 18 6-6-6-6"></path>
-                        </svg>
-                    </button>
                 </div>
                 <div class="group relative h-[400px]">
                     <div class="absolute inset-0 rounded-lg bg-amber-900/20 transition-opacity duration-300 group-hover:opacity-0"></div>

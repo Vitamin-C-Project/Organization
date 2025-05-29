@@ -34,6 +34,7 @@ class MembershipController extends Controller
             'positions' => $positions,
             'years' => $years,
             'memberships' => $memberships,
+            "configs" => $this->getConfigs()
         ]);
     }
 
@@ -81,7 +82,8 @@ class MembershipController extends Controller
         }
     }
 
-    public function transfer(Request $request, $id) {
+    public function transfer(Request $request, $id)
+    {
         DB::beginTransaction();
 
         try {

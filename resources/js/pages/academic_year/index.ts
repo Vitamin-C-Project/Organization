@@ -9,11 +9,11 @@ export default function Hook() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Tahun Ajaran',
-            href: '/dashboard/academic-year',
+            href: route('academic.year.index'),
         },
     ];
     const yearSelected = ref<AcademicYear>();

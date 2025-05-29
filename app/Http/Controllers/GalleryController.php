@@ -24,7 +24,8 @@ class GalleryController extends Controller
         $albums = $this->album->withCount('galleries as totalFile')->orderBy('status', 'desc')->paginate(12);
 
         return Inertia::render('gallery/Index', [
-            'albums' => $albums
+            'albums' => $albums,
+            "configs" => $this->getConfigs()
         ]);
     }
 
@@ -65,7 +66,8 @@ class GalleryController extends Controller
 
         return Inertia::render('gallery/detail/Index', [
             'album' => $album,
-            'galleries' => $galleries
+            'galleries' => $galleries,
+            "configs" => $this->getConfigs()
         ]);
     }
 

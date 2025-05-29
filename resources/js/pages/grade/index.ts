@@ -9,11 +9,11 @@ export default function Hook() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Kelas',
-            href: '/dashboard/grade',
+            href: route('grade.index'),
         },
     ];
 

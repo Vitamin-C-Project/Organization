@@ -4,7 +4,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { MainNavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { Album, AlignJustify, Calendar, LayoutGrid, LetterText, List, ListCheck, ListEnd, ListOrdered, Settings, UserCheck } from 'lucide-vue-next';
+import { Album, AlignJustify, Calendar, LayoutGrid, LetterText, List, ListCheck, ListEnd, ListOrdered, Settings } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 // const mainNavItems: NavItem[] = [
@@ -26,7 +26,7 @@ const mainMenu: MainNavItem[] = [
         menus: [
             {
                 title: 'Dasbor',
-                href: '/dashboard',
+                href: 'dashboard',
                 icon: LayoutGrid,
             },
         ],
@@ -36,17 +36,17 @@ const mainMenu: MainNavItem[] = [
         menus: [
             {
                 title: 'Anggota Organisasi',
-                href: '/dashboard/member',
+                href: 'member.index',
                 icon: AlignJustify,
             },
             {
                 title: 'Anggota Dewan',
-                href: '/dashboard/membership',
+                href: 'membership.index',
                 icon: ListCheck,
             },
             {
                 title: 'Alumni',
-                href: '/dashboard/alumni',
+                href: 'alumni.index',
                 icon: ListEnd,
             },
         ],
@@ -56,17 +56,17 @@ const mainMenu: MainNavItem[] = [
         menus: [
             {
                 title: 'Tahun Ajaran',
-                href: '/dashboard/academic-year',
+                href: 'academic.year.index',
                 icon: Calendar,
             },
             {
                 title: 'Kelas',
-                href: '/dashboard/grade',
+                href: 'grade.index',
                 icon: List,
             },
             {
                 title: 'Jabatan Organisasi',
-                href: '/dashboard/position',
+                href: 'position.index',
                 icon: ListOrdered,
             },
         ],
@@ -76,24 +76,24 @@ const mainMenu: MainNavItem[] = [
         menus: [
             {
                 title: 'Konfigurasi Aplikasi',
-                href: '/dashboard/configs',
+                href: 'config.index',
                 icon: Settings,
             },
             {
                 title: 'Artikel',
-                href: '/dashboard/article',
+                href: 'article.index',
                 icon: LetterText,
             },
             {
                 title: 'Galeri',
-                href: '/dashboard/gallery',
+                href: 'gallery.index',
                 icon: Album,
             },
-            {
-                title: 'Akun Admin',
-                href: '/dashboard/admins',
-                icon: UserCheck,
-            },
+            // {
+            //     title: 'Akun Admin',
+            //     href: '/dashboard/admins',
+            //     icon: UserCheck,
+            // },
         ],
     },
 ];

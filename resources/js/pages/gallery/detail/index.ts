@@ -14,15 +14,15 @@ export default function Hook({ album }: { album?: Album }) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Galeri',
-            href: '/dashboard/gallery',
+            href: route('gallery.index'),
         },
         {
             title: album?.title!,
-            href: `/dashboard/gallery/${album?.slug}`,
+            href: route('gallery.show', album?.slug),
         },
     ];
     const filesRef = ref<any>(null);

@@ -9,11 +9,11 @@ export default function Hook() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Alumni',
-            href: '/dashboard/alumni',
+            href: route('alumni.index'),
         },
     ];
     const alumniSelected = ref<Alumni>();

@@ -22,13 +22,16 @@ class ArticleController extends Controller
         $articles = $this->article->paginate();
 
         return Inertia::render('article/Index', [
-            'articles' => $articles
+            'articles' => $articles,
+            "configs" => $this->getConfigs()
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('article/Create');
+        return Inertia::render('article/Create', [
+            "configs" => $this->getConfigs()
+        ]);
     }
 
     public function store(StoreRequest $request): RedirectResponse
@@ -63,7 +66,8 @@ class ArticleController extends Controller
         }
 
         return Inertia::render('article/Edit', [
-            'article' => $article
+            'article' => $article,
+            "configs" => $this->getConfigs()
         ]);
     }
 

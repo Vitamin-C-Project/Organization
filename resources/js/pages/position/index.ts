@@ -9,11 +9,11 @@ export default function Hook() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Dasbor',
-            href: '/dashboard',
+            href: route('dashboard'),
         },
         {
             title: 'Jabatan Organisasi',
-            href: '/dashboard/position',
+            href: route('position.index'),
         },
     ];
     const positionSelected = ref<Position>();

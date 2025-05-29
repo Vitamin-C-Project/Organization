@@ -12,16 +12,15 @@ class PositionController extends Controller
 {
     public function __construct(
         protected $position = new Position()
-    )
-    {
-    }
+    ) {}
 
     public function index()
     {
         $positions = $this->position->paginate(10);
 
         return Inertia::render('position/Index', [
-            'positions' => $positions
+            'positions' => $positions,
+            "configs" => $this->getConfigs()
         ]);
     }
 

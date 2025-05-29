@@ -7,6 +7,8 @@ use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PositionController;
@@ -14,12 +16,16 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MembershipController;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/articles', [LandingController::class, 'indexArticle'])->name('articles');
+Route::get('/{any}', [LandingController::class, 'showArticle'])
+    ->where('any', '^(?!~|articles|contact|settings).*$')
+    ->name('article.show');
+
+Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
 
 
-Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::middleware(['auth', 'verified'])->prefix('/~/dashboard')->group(function () {
+    Route::get('/', DashboardController::class)->name('dashboard');
 
     Route::prefix('/academic-year')->group(function () {
         Route::get('/', [AcademicYearController::class, 'index'])->name('academic.year.index');
@@ -91,10 +97,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->group(function () 
         Route::delete('/{id}', 'destroy')->name('gallery.destroy');
 
         Route::post('/{id}/upload', 'upload')->name('gallery.upload');
-        Route::get('/{id}/download-file', 'downloadFile')->name('gallery.download.file');
         Route::delete('/{id}/delete-file', 'deleteFile')->name('gallery.delete.file');
     });
+    require __DIR__ . '/settings.php';
 });
 
-require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

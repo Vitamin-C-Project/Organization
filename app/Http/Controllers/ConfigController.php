@@ -14,10 +14,10 @@ class ConfigController extends Controller
 
     public function index()
     {
-        $configs = $this->config->paginate();
+        $configs = $this->config->get();
 
         return Inertia::render('config/Index', [
-            'configs' => $configs
+            'configs' => $configs,
         ]);
     }
 
