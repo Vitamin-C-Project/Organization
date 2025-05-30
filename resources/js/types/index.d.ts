@@ -156,4 +156,11 @@ export interface Gallery extends Common {
     files?: string;
 }
 
+export interface Contact extends Common {
+    name: string;
+    email: string;
+    message: string;
+    status: boolean;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;

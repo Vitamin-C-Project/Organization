@@ -99,6 +99,12 @@ Route::middleware(['auth', 'verified'])->prefix('/~/dashboard')->group(function 
         Route::post('/{id}/upload', 'upload')->name('gallery.upload');
         Route::delete('/{id}/delete-file', 'deleteFile')->name('gallery.delete.file');
     });
+
+    Route::prefix('contact')->group(function () {
+        Route::put('/{id}/update-status', [ContactController::class, 'updateStatus'])->name('contact.update.status');
+        Route::delete('/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+    });
+
     require __DIR__ . '/settings.php';
 });
 

@@ -13,11 +13,6 @@ class ContactController extends Controller
         protected Contact $contact
     ) {}
 
-    public function index()
-    {
-        //
-    }
-
     public function store(ContactRequest $request)
     {
         DB::beginTransaction();
@@ -33,18 +28,44 @@ class ContactController extends Controller
         }
     }
 
-    public function show(Contact $contact)
+    public function updateStatus($id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $contact = $this->contact->find($id);
+            if (!$contact) {
+                throw new \Exception('Data tidak ditemukan');
+            }
+
+            $contact->status = !$contact->status;
+            $contact->save();
+
+            DB::commit();
+            return back()->with('success', 'Data berhasil disimpan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Data gagal disimpan');
+        }
     }
 
-    public function update(Request $request, Contact $contact)
+    public function destroy($id)
     {
-        //
-    }
+        DB::beginTransaction();
 
-    public function destroy(Contact $contact)
-    {
-        //
+        try {
+            $contact = $this->contact->find($id);
+            if (!$contact) {
+                throw new \Exception('Data tidak ditemukan');
+            }
+
+            $contact->delete();
+
+            DB::commit();
+            return back()->with('success', 'Data berhasil dihapus');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Data gagal dihapus');
+        }
     }
 }

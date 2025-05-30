@@ -57,7 +57,7 @@ function valueUpdater(updaterOrValue: Updater<RowSelectionState>, rowSelection: 
                     </template>
                 </template>
                 <TableRow v-else>
-                    <TableCell :colspan="columns.length" class="h-24 text-center"> No results. </TableCell>
+                    <TableCell :colspan="columns.length" class="h-24 text-center"> Tidak ada data. </TableCell>
                 </TableRow>
             </TableBody>
         </Table>
