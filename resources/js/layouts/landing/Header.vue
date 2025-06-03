@@ -8,6 +8,29 @@ import { ref } from 'vue';
 const isMenuOpen = ref(false);
 
 const page = usePage<SharedData>();
+
+const menus = [
+    {
+        title: 'Tentang Kami',
+        href: '/#about',
+    },
+    {
+        title: 'Artikel',
+        href: '/articles',
+    },
+    {
+        title: 'Galeri',
+        href: '/#gallery',
+    },
+    {
+        title: 'Hubungi Kami',
+        href: '/#contact',
+    },
+    {
+        title: 'Alumni',
+        href: '/alumni',
+    },
+];
 </script>
 
 <template>
@@ -25,10 +48,7 @@ const page = usePage<SharedData>();
                     <span class="text-2xl font-bold text-amber-800">{{ page.props.name }}</span>
                 </Link>
                 <div class="hidden space-x-8 md:flex">
-                    <Link href="/#about" class="nav-link">About</Link>
-                    <Link href="/articles" class="nav-link">Artikel</Link>
-                    <Link href="/#gallery" class="nav-link">Galeri</Link>
-                    <Link href="/#contact" class="nav-link">Hubungi Kami</Link>
+                    <Link class="nav-link" v-for="menu in menus" :key="menu.title" :href="menu.href">{{ menu.title }}</Link>
                 </div>
                 <button class="cursor-pointer md:hidden" @click="isMenuOpen = !isMenuOpen">
                     <X class="text-amber-800" :size="24" v-if="isMenuOpen" />
@@ -38,10 +58,7 @@ const page = usePage<SharedData>();
 
             <div className="md:hidden absolute top-16 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md animate-fade-in" v-if="isMenuOpen">
                 <div className="flex flex-col p-4 space-y-4">
-                    <Link href="/#about" class="nav-link">About</Link>
-                    <Link href="/articles" class="nav-link">Artikel</Link>
-                    <Link href="/#gallery" class="nav-link">Galeri</Link>
-                    <Link href="/#contact" class="nav-link">Hubungi Kami</Link>
+                    <Link class="nav-link" v-for="menu in menus" :key="menu.title" :href="menu.href">{{ menu.title }}</Link>
                 </div>
             </div>
         </div>

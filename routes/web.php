@@ -18,10 +18,14 @@ use App\Http\Controllers\MembershipController;
 Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/articles', [LandingController::class, 'indexArticle'])->name('articles');
 Route::get('/{any}', [LandingController::class, 'showArticle'])
-    ->where('any', '^(?!~|articles|contact|settings).*$')
+    ->where('any', '^(?!~|articles|contact|settings|alumni).*$')
     ->name('article.show');
 
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
+
+Route::prefix('alumni')->group(function () {
+    Route::get('/', [LandingController::class, 'indexAlumni'])->name('landing.alumni.index');
+});
 
 
 Route::middleware(['auth', 'verified'])->prefix('/~/dashboard')->group(function () {

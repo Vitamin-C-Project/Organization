@@ -25,22 +25,24 @@ watchEffect(() => {
 const onSearch = () => {
     router.get(route('articles'), { search: filterData.search }, { preserveState: true, replace: true });
 };
+
+const appName = import.meta.env.VITE_APP_NAME;
 </script>
 
 <template>
     <Head title="Kumpulan Artikel">
         <link rel="canonical" :href="route('articles')" />
 
-        <meta name="description" content="Kumpulan Artikel" />
-        <meta name="keywords" content="Kumpulan Artikel" itemprop="keywords" />
+        <meta name="description" :content="`Kumpulan Artikel - ${appName}`" />
+        <meta name="keywords" :content="`Kumpulan Artikel - ${appName}`" itemprop="keywords" />
         <meta name="author" content="Admin" />
 
-        <meta content="Kumpulan Artikel" itemprop="headline" />
+        <meta :content="`Kumpulan Artikel - ${appName}`" itemprop="headline" />
         <meta :content="route('articles')" itemprop="url" />
 
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="Kumpulan Artikel" />
-        <meta property="og:description" content="Kumpulan Artikel" />
+        <meta property="og:title" :content="`Kumpulan Artikel - ${appName}`" />
+        <meta property="og:description" :content="`Kumpulan Artikel - ${appName}`" />
         <meta property="og:url" :content="route('articles')" />
     </Head>
 

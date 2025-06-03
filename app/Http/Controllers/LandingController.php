@@ -81,4 +81,11 @@ class LandingController extends Controller
             'configs' => $this->getConfigs()
         ]);
     }
+
+    public function indexAlumni()
+    {
+        return Inertia::render('landing/Alumni', [
+            'configs' => $this->getConfigs()
+        ]);
+    }
 }
